@@ -1,15 +1,16 @@
 <?php
+ob_start();
     require 'connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<link rel='shortcut icon' href='image/icon.ico' type='image/x-icon' />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-<title>test voting</title>
+<title>Vote : Female</title>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -104,7 +105,7 @@ a, a:hover{
 }
 
 .footer{
-  margin-top: -50px;
+    margin-top: 20px;
 }
 @media (min-width: 1200px) {
 }
@@ -118,12 +119,42 @@ a, a:hover{
 @media (max-width: 479px) {
   .logo{
             margin: auto;
-            height: 200px;
+            height: 240px;
             width: 100%;
             float: left;
             background-position: fixed;
   }
+}
+
+@media (max-width: 425px) {
+  .logo{
+            margin: auto;
+            height: 220px;
+            width: 100%;
+            float: left;
+            background-position: fixed;
   }
+}
+
+@media (max-width: 375px) {
+  .logo{
+            margin: auto;
+            height: 180px;
+            width: 100%;
+            float: left;
+            background-position: fixed;
+  }
+}
+
+@media (max-width: 320px) {
+  .logo{
+            margin: auto;
+            height: 160px;
+            width: 100%;
+            float: left;
+            background-position: fixed;
+  }
+}
 
 .MaleBut,.FemaleBut {
     width: 50%;
@@ -155,16 +186,23 @@ a, a:hover{
        <form method="get" action="processfemale.php">
             <input type="hidden" name="nim" value="<?php echo $_SESSION['nim'];?>">
             <div id="dialog-confirm" title="Are you sure?">
-                <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Are you sure you want to vote this candidate?</p>
+                <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Are you sure you want to vote for this candidate?</p>
             </div>
             <?php
             $gender = 'female';
 
             if($gender=='female'){
-             
-                $femaleName= array('jessica','cathlin','alivia','jessica','cathlin','alivia','jessica','cathlin','alivia','nina');
-                $femaleImage= array('image/account.png','image/account.png','image/account.png','image/account.png','image/account.png','image/account.png','image/account.png','image/account.png','image/account.png','image/account.png');
-                $femalevoteid=array(11,12,13,14,15,16,17,18,19,20);
+                $femalevoteid=array(2,3,4,7,8,9,10,13,14,17);
+                $femaleImage= array('image/final/02.png','image/final/03.png','image/final/04.png','image/final/07.png','image/final/08.png','image/final/09.png','image/final/10.png','image/final/13.png','image/final/14.png','image/final/17.png');
+                $panjang = count($femalevoteid);
+                for($i = 0;$i<$panjang;$i++){
+                  $query = $conn -> prepare('SELECT * from kandidat where nomor = :nomor');
+                  $query ->bindParam(':nomor',$femalevoteid[$i]);
+                  $query -> execute();
+                  $result = $query->fetchAll(PDO::FETCH_BOTH);
+                  $kappa = $result['0'];
+                  $femaleName[$i] = $kappa['nama'];
+                 }  
                 $resultName = count($femaleName);
                 $resultImage=count($femaleImage);
 
@@ -176,7 +214,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[0]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/02.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -193,7 +231,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[1]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/03.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -210,7 +248,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[2]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/04.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -227,7 +265,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[3]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/07.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -244,7 +282,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[4]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/08.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -261,7 +299,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[5]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/09.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -278,7 +316,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[6]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/10.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -295,7 +333,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[7]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/13.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -312,7 +350,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[8]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/14.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -329,7 +367,7 @@ a, a:hover{
                 echo" <img src='".$femaleImage[9]."' class='img-responsive img-center ' alt='Responsive image' width='180px' height='180px' style='margin-top:2%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-3'>";
-                echo" <img src='image/number.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
+                echo" <img src='image/number/17.png' class='img-responsive img-center' alt='Responsive image' width='100px' height='100px' style='margin-top:20%;margin-left:30%;'> ";
                 echo"</div>";
                 echo"<div class='col-xs-5'>";
                 echo"<a style='margin-top:30%;'></a>";
@@ -340,6 +378,7 @@ a, a:hover{
                 echo"</div>";
                 
           }
+          ob_end_flush();
           ?>            
         </form>
         <div class="footer text-center">
@@ -348,5 +387,3 @@ a, a:hover{
 </div>
 </body>
 </html>                                     
-
- <input type="button" class='btn btn-lg btn-primary btn-sm btn-block' name='femalevoteid' value='".$femalevoteid[$i]."' style='margin-left:-1%;font-size:13px;'>VOTE</a>

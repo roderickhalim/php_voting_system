@@ -1,9 +1,11 @@
 <?php
+ob_start();
 	require 'connect.php';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+<link rel='shortcut icon' href='image/icon.ico' type='image/x-icon' />
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="" />
@@ -14,40 +16,18 @@
 </head>
 <body>
 <?php
-
 	if (isLogin()){
 		$nim=$_SESSION['nim'];
     		$voting2 = $_GET['femalevoteid'];
-    		$query1 = $conn->prepare("update voting set voting2=$voting2 where nim=$nim");
-    		$result1=$query1->execute();
+      		$query1 = $conn->prepare("update voting set voting2=:voting1 where nim=:nim");
+		$query1->bindParam(':voting1',$voting2);
+		$query1->bindParam(':nim',$nim);
+		$query1->execute();
     		header("location:thankyou.php");
-    		//femalevoteid=voting2
-			//malevoteid=voting1
-		}else{
+}else{
 			echo "";
 		}
-	// 	if{ // data belum ada
-	// 	$query = $conn -> prepare('Insert into voting(nim,femalevoteid,malevoteid)values(:nim,:femalevoteid,:malevoteid)');
-	// 	$query->bindParam(':nim', $nim);
-	// 	$query->bindParam(':femalevoteid', $femalevoteid);
-	// 	$query->bindParam(':malevoteid', $malevoteid);
-	// 	$result = $query->execute();
-	// 	}
-	
-	// }		
- //    	if(!isset($_GET['femalevoteid']) && isset($_GET['malevoteid'])){
- //    		echo "data pria berhasil terpilih<br>";
- //    		$malevoteid = $_GET['malevoteid'];
- //    		echo "data pria berhasil terpilih<br>";
- //    		$query1 = $conn->prepare("update voting set malevoteid=$malevoteid where nim=$nim");
- //    		echo "data pria berhasil terpilih<br>";
- //    		$result1=$query1->execute();
- //    		if(! $result)
- //    			die("gagal input votin"); 
- //    		header("location:vote.php");
-
-
-    
+ob_end_flush();  
 
 ?>
 	<script src="assets/js/jquery-1.11.1.js"></script>

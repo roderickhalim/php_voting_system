@@ -1,5 +1,6 @@
 <?php
     require 'connect.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-<title>Ambassadors UPH Medan</title>
+<title>ADMIN</title>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -39,6 +40,8 @@
 
     body{
         background:black;
+        min-height: 500px;
+ 		    padding-top: 70px;
     }
     .img-center {margin:0 auto;}
 
@@ -66,27 +69,12 @@
   padding: 10px;
 }
 
-input[type="text"] {
-  margin-bottom: 0px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  color: #D4AF37;
-  border :1px solid #D4AF37;
-}
-
-input[type="password"] {
-  margin-bottom: 20px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  color: #D4AF37;
-  border :1px solid #D4AF37;
-}
-
 
 .btn-primary , .btn-primary:hover{
     background: #000 ;
     color: #D4AF37;
     border :1px solid #D4AF37;
+    margin-top: 10px;
 }
 
 body{
@@ -106,8 +94,17 @@ a, a:hover{
 }
 
 .footer{
-  margin-top: -50px;
+  margin-top: -40px;
 }
+
+.text-center{
+  font-family: "Trajan Pro";
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  color: #fff;
+  }
 @media (min-width: 1200px) {
 }
 
@@ -120,7 +117,7 @@ a, a:hover{
 @media (max-width: 479px) {
   .logo{
             margin: auto;
-            height: 240px;
+            height: 250px;
             width: 100%;
             float: left;
             background-position: fixed;
@@ -130,7 +127,7 @@ a, a:hover{
 @media (max-width: 425px) {
   .logo{
             margin: auto;
-            height: 220px;
+            height: 230px;
             width: 100%;
             float: left;
             background-position: fixed;
@@ -140,7 +137,7 @@ a, a:hover{
 @media (max-width: 375px) {
   .logo{
             margin: auto;
-            height: 180px;
+            height: 200px;
             width: 100%;
             float: left;
             background-position: fixed;
@@ -150,19 +147,19 @@ a, a:hover{
 @media (max-width: 320px) {
   .logo{
             margin: auto;
-            height: 160px;
+            height: 170px;
             width: 100%;
             float: left;
             background-position: fixed;
   }
 }
 
+
 </style>
 </head>
 <body>
 
-<!-- <div class="container-fluid">
-    <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+<nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -171,40 +168,44 @@ a, a:hover{
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="index.php">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="about.php">About</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="logout.php">Logout</a></li>
           </ul>
         </div>
       </div>
-    </nav> -->
+    </nav>
 
-        <div class="logo text-center">
+  <div class="logo text-center">
             <img src="image/banner.png" class="img-responsive img-center" alt="Responsive image" width="500px" height="200px"> 
         </div>
-        <form id="login" action="submit_login.php" method="post" name="Login_Form" class="form-signin">   
-              <input type="text" class="form-control" name="nim" placeholder="Username" autofocus="">
-              <input type="password" class="form-control" name="password" placeholder="Password">
-        <?php
-        if(isLogin()){
-            echo "<button class='btn btn-lg btn-primary btn-block'  name='logout' value='Logout'><a class='confirmLink' href='logout.php'>LOGOUT</a></button>";
-          }else{
-            echo "<button class='btn btn-lg btn-primary btn-block'  name='login' value='Login' type='Submit'>LOGIN</button>";
-          }
-        if (isset($_SESSION["flash"]) && strlen($_SESSION["flash"]) != 0) {
-          echo "<p class='text-center' style='color:#FF0000'>".$_SESSION["flash"]."</p>";
-          $_SESSION['flash']="";
-        }
-        ?> 
-        </form>  
+        <div id="login" name="Login_Form" class="form-signin">   
+   <?php
+   if(isLogin()){
+    	if($_SESSION['nim'] == 'admin'){}
+    	else{
+    		die("<h1 class='text-center'>YOU ARE NOT PRIVILEGED TO SEE THIS PAGE!</h1>");
+   	 }
+    		}else{
+    	die("<h1 class='text-center'>YOU ARE NOT PRIVILEGED TO SEE THIS PAGE!</h1>");
+   	 }
+  ?> 	 
+            <button class='btn btn-lg btn-primary btn-block' onclick="location.href='male.php'" formtarget="_blank">MALE GRAPH</button>
+            <button class='btn btn-lg btn-primary btn-block' onclick="location.href='female.php'" formtarget="_blank">FEMALE GRAPH</button>
+            <button class='btn btn-lg btn-primary  btn-block' onclick="location.href='result.php'" formtarget="_blank">RESULT</button>
+            <button class='btn btn-lg btn-primary  btn-block' onclick="location.href='add_user.php'" formtarget="_blank">ADD USER</button>
+            <button class='btn btn-lg btn-primary  btn-block' onclick="location.href='add_candidate.php'" formtarget="_blank">ADD CANDIDATE</button>
+            <button class='btn btn-lg btn-primary  btn-block' onclick="location.href='user_list.php'" formtarget="_blank">USER LIST</button>
+            <button class='btn btn-lg btn-primary  btn-block' onclick="location.href='clear_vote.php'" formtarget="_blank">CLEAR VOTING</button>
+        </div>  
 
         <div class="footer text-center">
             <img src="image/footer.png" class="img-responsive img-center" alt="Responsive image" width="500px" height="200px"> 
         </div>
-</div>
 </body>
 </html>                                     

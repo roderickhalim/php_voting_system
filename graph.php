@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-<title>test voting</title>
+<title>Result</title>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -93,10 +93,8 @@
     }
     ?>  
   }
-  @keyframes chartone{
-    from{height:20px;}
-    to{height:<?php echo $x[1]*40 ?>px;}
-  }
+
+  
 
   .rectangle2{
     position:absolute;
@@ -119,10 +117,6 @@
     
     }
     ?>  
-  }
-  @keyframes charttwo{
-    from{height:20px;}
-    to{height:<?php echo $x[2]*40 ?>px;}
   }
 
 
@@ -149,10 +143,6 @@
     ?>  
   }
 
-  @keyframes chartthree{
-    from{height:20px;}
-    to{height:<?php echo $x[3]*40 ?>px;}
-  }
   .rectangle4{
     position:absolute;
     bottom:0;
@@ -176,10 +166,7 @@
     ?>  
   }
 
-  @keyframes chartthree{
-    from{height:20px;}
-    to{height:<?php echo $x[4]*40 ?>px;}
-  }
+ 
   .rectangle5{
     position:absolute;
     bottom:0;
@@ -203,10 +190,6 @@
     ?>  
   }
 
-  @keyframes chartthree{
-    from{height:20px;}
-    to{height:<?php echo $x[5]*40 ?>px;}
-  }
 
   .rectangle6{
     position:absolute;
@@ -228,11 +211,7 @@
     $x[6] = $rows;
     ?>  
   }
-  @keyframes chartsix{
-    from{height:20px;}
-    to{height:<?php echo $x[6]*40 ?>px;}
-  }
-
+ 
   .rectangle7{
     position:absolute;
     bottom:0;
@@ -253,10 +232,7 @@
     $x[7] = $rows;
     ?>  
   }
-  @keyframes chartseven{
-    from{height:20px;}
-    to{height:<?php echo $x[7]*40 ?>px;}
-  }
+
 
   .rectangle8{
     position:absolute;
@@ -278,10 +254,7 @@
     $x[8] = $rows;
     ?>  
   }
-  @keyframes charteight{
-    from{height:20px;}
-    to{height:<?php echo $x[8]*40 ?>px;}
-  }
+
   .rectangle9{
     position:absolute;
     bottom:0;
@@ -301,10 +274,6 @@
     $rows = $query->fetchColumn();
     $x[9] = $rows;
     ?>  
-  }
-  @keyframes chartnine{
-    from{height:20px;}
-    to{height:<?php echo $x[9]*40 ?>px;}
   }
 
   .rectangle10{
@@ -327,20 +296,139 @@
     $x[10] = $rows;
     ?>  
   }
-  @keyframes chartten{
-    from{height:20px;}
-    to{height:<?php echo $x[10]*40 ?>px;}
-  }
+
   <?php
   function berinama($tes){
     if($tes == 1){
-      echo "satu";
+      echo "Budi";
     }else if($tes == 5){
       echo "lima";
     }
   }
+  function size($tes){
+   global $big;
+   if($tes >= 500 ){
+    $big = 10;
+   }else if($tes >= 250){
+   $big = 15;
+   }
+   else{
+   $big = 30;
+   }
+  }
   ?>
-
+  @keyframes chartone{
+    from{height:20px;}
+    to{height: <?php 
+    	if($x[1]==0)
+    		echo '20px';
+    	else
+    		echo $x[1]*20 .'px';
+    ?>
+    }
+  }
+  @keyframes charttwo{
+    from{height:20px;}
+   to{height:
+    <?php 
+    	if($x[10]==0)
+    		echo '20px';
+    	else
+    		echo $x[2]*$big .'px';
+    ?>
+    }
+  }
+ @keyframes chartfour{
+    from{height:20px;}
+    to{height:
+    <?php 
+    	if($x[10]==0)
+    		echo '20px';
+    	else
+    		echo $x[4]*$big .'px';
+    ?>
+    }
+  }  
+  @keyframes chartfive{
+    from{height:20px;}
+    to{height:
+    <?php 
+    	if($x[10]==0)
+    		echo '20px';
+    	else
+    		echo $x[5]*$big.'px';
+    ?>
+    }
+  }
+ @keyframes chartsix{
+    from{height:20px;}
+    to{height:
+    <?php 
+    	if($x[10]==0)
+    		echo '20px';
+    	else
+    		echo $x[6]*$big .'px';
+    ?>
+    }
+  }
+  @keyframes chartseven{
+    from{height:20px;}
+    to{height:
+    <?php 
+    	if($x[10]==0)
+    		echo '20px';
+    	else
+    		echo $x[7]*$big .'px';
+    ?>
+    }
+  }
+  @keyframes chartthree{
+    from{height:20px;}
+    to{height:
+    <?php 
+    	if($x[10]==0)
+    		echo '20px';
+    	else
+    		echo $x[3]*$big .'px';
+    ?>
+    }
+  }
+    
+  @keyframes charteight{
+    from{height:20px;}
+    to{height:
+    <?php 
+    	if($x[10]==0)
+    		echo '20px';
+    	else
+    		echo $x[8]*$big .'px';
+    ?>
+    }
+  }    
+  @keyframes chartnine{
+    from{height:20px;}
+    to{height:
+    <?php 
+    	if($x[10]==0)
+    		echo '20px';
+    	else
+    		echo $x[9]*$big .'px';
+    ?>
+    }
+  }
+    
+  @keyframes chartten{
+    from{height:20px;}
+    to{height:
+    <?php 
+    	if($x[10]==0)
+    		echo '20px';
+    	else
+    		echo $x[10]*$big.'px';
+    ?>
+    }
+  }   
+   
 body{
     background: radial-gradient(circle, #202020,#000000);
     background-size:cover;
@@ -417,28 +505,36 @@ h1{
 
 </style>
 </head>
+
 <body>
 
 <div class="container-fluid">
         <div class="logo text-center">
             <img src="image/banner.png" class="img-responsive img-center" alt="Responsive image" width="500px" height="200px"> 
         </div>
-
-        <form class="form-signin"> 
-        <h1 class="text-center">The Winner of Male Ambassador is<br> <?php echo berinama((max($x)))?></h1>
-        <div class="wrapper">      
-          <div class="rectangle1" style="margin-left:0px"><img src="image/man.png"></div>
-          <div class="rectangle2" style="margin-left:50px"><img src="image/man.png"></div>
-          <div class="rectangle3" style="margin-left:100px"><img src="image/man.png"></div>
-          <div class="rectangle4" style="margin-left:150px"><img src="image/man.png"></div>
-          <div class="rectangle5" style="margin-left:200px"><img src="image/man.png"></div>
-          <div class="rectangle6" style="margin-left:250px"><img src="image/man.png"></div>
-          <div class="rectangle7" style="margin-left:300px"><img src="image/man.png"></div>
-          <div class="rectangle8" style="margin-left:350px"><img src="image/man.png"></div>
-          <div class="rectangle9" style="margin-left:400px"><img src="image/man.png"></div>
-          <div class="rectangle10" style="margin-left:450px"><img src="image/man.png"></div>
-        </div>
         
+        <form class="form-signin"> 
+        <h1 class="text-center">The Favorite Male Winner of UPH Medan Ambassadors 2016 is <br> <?php echo berinama(array_search(max($x), $x));?></h1>
+  <?php        
+  	if (new DateTime() > new DateTime("2015-11-09 16:00:00")) {
+		    echo 'kaninabo';
+	}else{
+        echo "<div class='wrapper'>";      
+        echo "<div class='rectangle1' style='margin-left:0px'><img src='image/man.png'></div>";
+        echo "<div class='rectangle2' style='margin-left:50px'><img src='image/man.png'></div>";
+        echo "<div class='rectangle3' style='margin-left:100px'><img src='image/man.png'></div>";
+        echo "<div class='rectangle4' style='margin-left:150px'><img src='image/man.png'></div>";
+        echo "<div class='rectangle5' style='margin-left:200px'><img src='image/man.png'></div>";
+        echo "<div class='rectangle6' style='margin-left:250px'><img src='image/man.png></div>";
+        echo "<div class='rectangle7' style='margin-left:300px'><img src='image/man.png'></div>";
+        echo "<div class='rectangle8' style='margin-left:350px'><img src='image/man.png'></div>";
+        echo "<div class='rectangle9' style='margin-left:400px'><img src='image/man.png'></div>";
+        echo "<div class='rectangle10' style='margin-left:450px'><img src='image/man.png'></div>";
+        }
+        echo "</div>";
+      
+
+?>
         <div class="footer text-center">
             <img src="image/footer.png" class="img-responsive img-center" alt="Responsive image" width="500px" height="200px"> 
         </div>

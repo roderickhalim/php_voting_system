@@ -1,9 +1,11 @@
 <?php
+ob_start();
 	require 'connect.php';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+<link rel='shortcut icon' href='image/icon.ico' type='image/x-icon' />
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="" />
@@ -14,61 +16,18 @@
 </head>
 <body>
 <?php
-
 	if (isLogin()){
 			$nim=$_SESSION['nim'];
-			
-			$query = $conn -> prepare('Insert into voting(nim,voting2,voting1)values(:nim,null,null)');
-			$query->bindParam(':nim', $nim);
-			$result = $query->execute();
-			header("location:votefemale.php");
-			//femalevoteid=voting2
-			//malevoteid=voting1
-			$nim=$_SESSION['nim'];
 			$voting1 = $_GET['malevoteid'];
-    		$query1 = $conn->prepare("update voting set voting1=$voting1 where nim=$nim");
-    		$result1=$query1->execute();
+   			$query1 = $conn->prepare("update voting set voting1=:voting1 where nim=:nim");
+			$query1->bindParam(':voting1',$voting1);
+			$query1->bindParam(':nim',$nim);
+			$query1->execute();
     		header("location:votefemale.php");
-    		//femalevoteid=voting2
-			//malevoteid=voting1
 		}else{
-			echo "";
+			header("location:votemale.php"); 
 		}
-	// 	if{ // data belum ada
-	// 	$query = $conn -> prepare('Insert into voting(nim,femalevoteid,malevoteid)values(:nim,:femalevoteid,:malevoteid)');
-	// 	$query->bindParam(':nim', $nim);
-	// 	$query->bindParam(':femalevoteid', $femalevoteid);
-	// 	$query->bindParam(':malevoteid', $malevoteid);
-	// 	$result = $query->execute();
-	// 	}
-	
-	// }		
- //    	if(!isset($_GET['femalevoteid']) && isset($_GET['malevoteid'])){
- //    		echo "data pria berhasil terpilih<br>";
- //    		$malevoteid = $_GET['malevoteid'];
- //    		echo "data pria berhasil terpilih<br>";
- //    		$query1 = $conn->prepare("update voting set malevoteid=$malevoteid where nim=$nim");
- //    		echo "data pria berhasil terpilih<br>";
- //    		$result1=$query1->execute();
- //    		if(! $result)
- //    			die("gagal input votin"); 
- //    		header("location:vote.php");
-
-
- //    	}	else if (isset($_GET['femalevoteid']) && !isset($_GET['malevoteid'])) {
- //    		echo "data wanita berhasil terpilih";
- //    		$femalevoteid = $_GET['femalevoteid'];
- //    		echo "data wanita berhasil terpilih<br>";
- //    		$query1 = $conn->prepare("update voting set femalevoteid=$femalevoteid where nim=$nim");
- //    		echo "data wanita berhasil terpilih<br>";
- //    		$result1=$query1->execute();
- //    		if(! $result)
- //    			die("gagal input votin"); 
- //    		header("location:vote.php");
- //    	}else{
- //    		echo "bye bye";
- //    	}
-
+ob_end_flush();
 ?>
 	<script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
