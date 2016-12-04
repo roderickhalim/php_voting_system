@@ -3,18 +3,23 @@ confirmation = false;
 $(document).ready(function() {
     $("#dialog-confirm").dialog({
       autoOpen: false,
-      resizable: true,
+      resizable: false,
       height: "auto",
-      width: 300,
+      width: 400,
       modal: true,
     });
-    $('button[name="login"]').on('click', function(e){
+    $('button[name="add"]').on('click', function(e){
         if (! confirmation)
             e.preventDefault();
 
         $("#dialog-confirm").dialog({
             buttons : {
-                "OK" : function() {
+                "Yes" : function() {
+                    confirmation = true;
+                    //$(this).trigger('click');
+                    console.log($(e.target).trigger('click'));
+                },
+                "No" : function() {
                     $(this).dialog("close");
                 }
             }
@@ -23,5 +28,3 @@ $(document).ready(function() {
         $("#dialog-confirm").dialog("open");
     });
 });
-
-

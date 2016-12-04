@@ -8,7 +8,7 @@ $(document).ready(function() {
       width: 400,
       modal: true,
     });
-    $('button[name="femalevoteid"]').on('click', function(e){
+    $('button[name="delete"]').on('click', function(e){
         if (! confirmation)
             e.preventDefault();
 
